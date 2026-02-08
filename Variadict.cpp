@@ -1,7 +1,22 @@
 #include <iostream>
 using namespace std;
 
-// Enter your code for reversed_binary_value<bool...>()
+template <bool... digits>
+int reversed_binary_value() {
+    int sum = 0;
+    int power = 0;
+    
+    // Fold expression (C++17) to iterate over the pack
+    // We use a comma operator trick to perform actions for each digit
+    ([&] {
+        if (digits) {
+            sum += (1 << power);
+        }
+        power++;
+    }(), ...);
+    
+    return sum;
+}
 
 
 template <int n, bool...digits>
